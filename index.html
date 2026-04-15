@@ -12,16 +12,15 @@
     <div id="auth-screen" class="auth-wrapper">
         <div class="auth-card">
             <h2>Witaj w klasie 🌿</h2>
-            <input type="text" id="username" placeholder="Twój Login">
+            <input type="text" id="username" placeholder="Login">
             <input type="password" id="password" placeholder="Hasło">
             <button onclick="handleAuth()">Zaloguj / Stwórz konto</button>
-            <p style="font-size: 11px; margin-top: 10px; color: #666;">Wpisz 'admin' w loginie, by dostać MODA</p>
+            <p style="font-size: 11px; margin-top: 10px; color: #666;">Admin: admin / admln</p>
         </div>
     </div>
 
     <!-- EKRAN GŁÓWNY -->
     <div id="app-screen" class="hidden">
-        <!-- Pasek boczny (PV i Menu) -->
         <aside id="side-menu">
             <div class="profile-section">
                 <label class="avatar-label">
@@ -30,23 +29,24 @@
                 </label>
                 <div class="user-meta">
                     <span id="user-display"></span>
-                    <span id="admin-tag" class="hidden">MOD</span>
+                    <div id="admin-tag" class="hidden">GŁÓWNY ADMIN</div>
                 </div>
             </div>
             <nav class="pv-list">
-                <p class="nav-title">Wiadomości PV</p>
-                <div class="pv-item" onclick="startPV('Czat Ogólny')">💬 Czat Ogólny</div>
-                <div class="pv-item" onclick="startPV('Marek')">👤 Marek (PV)</div>
-                <div class="pv-item" onclick="startPV('Ania')">👤 Ania (PV)</div>
+                <p class="nav-title">Kanały</p>
+                <div class="pv-item active" id="btn-Ogólny" onclick="switchChat('Ogólny')">🌐 Czat Ogólny</div>
+                <p class="nav-title">Prywatne (PV)</p>
+                <div class="pv-item" id="btn-Marek" onclick="switchChat('Marek')">👤 Marek</div>
+                <div class="pv-item" id="btn-Ania" onclick="switchChat('Ania')">👤 Ania</div>
+                <div class="pv-item" id="btn-Kamil" onclick="switchChat('Kamil')">👤 Kamil</div>
             </nav>
             <button onclick="location.reload()" class="logout-btn">Wyloguj</button>
         </aside>
 
-        <!-- Obszar Czatu -->
         <main id="chat-area">
             <header class="chat-header">
-                <h3 id="current-chat-title">Czat Ogólny</h3>
-                <button class="gear-btn" onclick="toggleDarkMode()">🌙</button>
+                <h3 id="current-chat-title">Ogólny</h3>
+                <button class="mode-btn" onclick="toggleDarkMode()">🌙</button>
             </header>
             
             <div id="chat-main"></div>
