@@ -1,12 +1,92 @@
-:root { --bg: #f0f2f5; --card: white; --text: #333; }
-.dark-mode { --bg: #1a1a1a; --card: #2d2d2d; --text: #eee; }
+:root {
+    --bg: #f4f7f6;
+    --primary: #2d6a4f; /* Ciemna zieleń eko */
+    --accent: #74c69d;
+    --text: #1b4332;
+    --card-bg: #ffffff;
+}
 
-body { background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; transition: 0.3s; }
-.container { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; text-align: center; }
-input { width: 90%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; background: inherit; color: inherit; }
-button { width: 100%; padding: 10px; margin: 5px 0; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; }
-.btn-red { background: #dc3545; }
-.hidden { display: none; }
-.section { margin-top: 20px; border-top: 1px solid #555; padding-top: 10px; }
-#messages { height: 150px; overflow-y: auto; border: 1px solid #555; margin-bottom: 10px; padding: 5px; text-align: left; font-size: 14px; }
-#toggle-text { font-size: 12px; color: #007bff; cursor: pointer; }
+body.dark-mode {
+    --bg: #1b1b1b;
+    --card-bg: #2d2d2d;
+    --text: #d8f3dc;
+    --primary: #52b788;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: 0.3s;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    width: 350px;
+    text-align: center;
+}
+
+.logo { font-size: 40px; margin-bottom: 10px; }
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    box-sizing: border-box;
+    background: transparent;
+    color: inherit;
+}
+
+.btn-primary, .btn-send {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 5px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#messages-container {
+    height: 250px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    margin: 15px 0;
+    padding: 10px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+}
+
+.dark-mode #messages-container { background: #3d3d3d; border-color: #444; }
+
+.hidden { display: none !important; }
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.btn-danger { background: #bc4749; color: white; border: none; padding: 10px; border-radius: 10px; width: 100%; margin-top: 20px; }
