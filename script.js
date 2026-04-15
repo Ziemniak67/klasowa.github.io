@@ -1,21 +1,10 @@
-// Flaga sprawdzająca czy jesteśmy w trybie logowania czy rejestracji
 let isLoginMode = true;
 
 function toggleMode() {
     isLoginMode = !isLoginMode;
-    const btn = document.querySelector('#auth-screen button');
-    const link = document.getElementById('toggle-text');
-    const title = document.querySelector('#auth-screen h2');
-
-    if (isLoginMode) {
-        title.innerText = "Witaj w klasie 🌿";
-        btn.innerText = "Zaloguj się";
-        link.innerText = "Nie masz konta? Załóż konto";
-    } else {
-        title.innerText = "Stwórz konto ✨";
-        btn.innerText = "Zarejestruj się";
-        link.innerText = "Masz już konto? Zaloguj się";
-    }
+    document.getElementById('auth-title').innerText = isLoginMode ? "Witaj w klasie 🌿" : "Stwórz konto ✨";
+    document.getElementById('auth-btn').innerText = isLoginMode ? "Zaloguj się" : "Zarejestruj się";
+    document.getElementById('toggle-text').innerText = isLoginMode ? "Nie masz konta? Załóż konto" : "Masz konto? Zaloguj się";
 }
 
 function handleAuth() {
@@ -28,8 +17,8 @@ function handleAuth() {
     }
 
     if (isLoginMode) {
-        // LOGOWANIE
-        const storedPass = localStorage.getItem(user);
+        // Logowanie
+        const storedPass = localStorage.getItem("user_" + user);
         if (storedPass && storedPass === pass) {
             document.getElementById('auth-screen').classList.add('hidden');
             document.getElementById('app-screen').classList.remove('hidden');
@@ -38,18 +27,17 @@ function handleAuth() {
             alert("Błędny login lub hasło!");
         }
     } else {
-        // REJESTRACJA
-        if (localStorage.getItem(user)) {
-            alert("Taki użytkownik już istnieje!");
+        // Rejestracja
+        if (localStorage.getItem("user_" + user)) {
+            alert("Ten login jest zajęty!");
         } else {
-            localStorage.setItem(user, pass);
-            alert("Konto utworzone pomyślnie! Możesz się teraz zalogować.");
-            toggleMode(); // Przełącz na logowanie
+            localStorage.setItem("user_" + user, pass);
+            alert("Konto utworzone! Teraz możesz się zalogować.");
+            toggleMode();
         }
     }
 }
 
-// Funkcje czatu i ustawień (bez zmian)
 function toggleSettings() {
     document.getElementById('settings-menu').classList.toggle('hidden');
 }
