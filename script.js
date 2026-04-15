@@ -1,51 +1,49 @@
-let isLoginMode = true;
-
-function toggleMode() {
-    isLoginMode = !isLoginMode;
-    document.getElementById('auth-title').innerText = isLoginMode ? "Witaj w klasie 🌿" : "Stwórz konto ✨";
-    document.getElementById('auth-btn').innerText = isLoginMode ? "Zaloguj się" : "Zarejestruj się";
-    document.getElementById('toggle-text').innerText = isLoginMode ? "Nie masz konta? Załóż konto" : "Masz konto? Zaloguj się";
-}
-
+// Ta funkcja zajmuje się wszystkim: logowaniem i rejestracją na raz
 function handleAuth() {
     const user = document.getElementById('username').value.trim();
     const pass = document.getElementById('password').value.trim();
 
-    if (!user || !pass) {
-        alert("Wpisz login i hasło!");
+    // 1. Sprawdź czy wpisano dane
+    if (user === "" || pass === "") {
+        alert("Wpisz cokolwiek w pola login i hasło!");
         return;
     }
 
-    if (isLoginMode) {
-        // Logowanie
-        const storedPass = localStorage.getItem("user_" + user);
-        if (storedPass && storedPass === pass) {
-            document.getElementById('auth-screen').classList.add('hidden');
-            document.getElementById('app-screen').classList.remove('hidden');
-            document.getElementById('user-display').innerText = user;
-        } else {
-            alert("Błędny login lub hasło!");
-        }
+    // 2. Pobierz hasło dla tego użytkownika z pamięci
+    const savedPassword = localStorage.getItem("klasa_" + user);
+
+    if (savedPassword === null) {
+        // REJESTRACJA: Jeśli użytkownik nie istnieje, stwórz go
+        localStorage.setItem("klasa_" + user, pass);
+        alert("Konto utworzone! Witaj w klasie.");
+        enterApp(user);
     } else {
-        // Rejestracja
-        if (localStorage.getItem("user_" + user)) {
-            alert("Ten login jest zajęty!");
+        // LOGOWANIE: Jeśli użytkownik istnieje, sprawdź hasło
+        if (savedPassword === pass) {
+            enterApp(user);
         } else {
-            localStorage.setItem("user_" + user, pass);
-            alert("Konto utworzone! Teraz możesz się zalogować.");
-            toggleMode();
+            alert("Błędne hasło dla tego użytkownika!");
         }
     }
 }
 
+// Funkcja wejścia do aplikacji
+function enterApp(name) {
+    document.getElementById('auth-screen').classList.add('hidden');
+    document.getElementById('app-screen').classList.remove('hidden');
+    document.getElementById('user-display').innerText = name;
+}
+
+// Reszta funkcji (ustawienia i czat)
 function toggleSettings() {
-    document.getElementById('settings-menu').classList.toggle('hidden');
+    const menu = document.getElementById('settings-menu');
+    menu.classList.toggle('hidden');
 }
 
 function sendMsg() {
     const inp = document.getElementById('msg-input');
-    if (inp.value.trim()) {
-        appendMsg(inp.value, null);
+    if (inp.value.trim() !== "") {
+        addMessage(document.getElementById('user-display').innerText, inp.value, null);
         inp.value = "";
     }
 }
@@ -53,17 +51,21 @@ function sendMsg() {
 function sendFile(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
-        reader.onload = (e) => appendMsg(null, e.target.result);
+        reader.onload = (e) => addMessage(document.getElementById('user-display').innerText, null, e.target.result);
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-function appendMsg(text, img) {
+function addMessage(who, text, img) {
     const chat = document.getElementById('chat-main');
     const div = document.createElement('div');
     div.className = 'msg own';
-    if (text) div.innerText = text;
-    if (img) div.innerHTML = `<img src="${img}" class="chat-img">`;
+    
+    let content = `<b>${who}:</b><br>`;
+    if (text) content += text;
+    if (img) content += `<img src="${img}" class="chat-img" style="display:block; max-width:100%; margin-top:5px;">`;
+    
+    div.innerHTML = content;
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
 }
