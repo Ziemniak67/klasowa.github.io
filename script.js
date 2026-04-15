@@ -2,65 +2,63 @@ let isLogin = true;
 
 function toggleMode() {
     isLogin = !isLogin;
-    document.getElementById('title').innerText = isLogin ? "Witaj w klasie!" : "Załóż konto";
     document.getElementById('main-btn').innerText = isLogin ? "Zaloguj się" : "Zarejestruj się";
-    document.getElementById('toggle-text').innerText = isLogin ? "Nowy tutaj? Załóż konto" : "Masz konto? Zaloguj się";
+    document.getElementById('toggle-text').innerText = isLogin ? "Nie masz konta? Załóż konto" : "Masz konto? Zaloguj się";
 }
 
 function handleAuth() {
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
-
-    if (!user || !pass) { alert("Uzupełnij pola!"); return; }
+    if (!user || !pass) return alert("Wpisz dane!");
 
     if (isLogin) {
-        if (localStorage.getItem(user) === pass) {
-            showWelcome(user);
-        } else {
-            alert("Nieprawidłowe dane logowania.");
-        }
+        if (localStorage.getItem(user) === pass) { showApp(user); }
+        else { alert("Błąd!"); }
     } else {
         localStorage.setItem(user, pass);
-        alert("Konto stworzone! Możesz się zalogować.");
-        toggleMode();
+        alert("Zarejestrowano!"); toggleMode();
     }
 }
 
-function showWelcome(user) {
-    document.getElementById('auth-box').classList.add('hidden');
-    document.getElementById('welcome-msg').classList.remove('hidden');
+function showApp(user) {
+    document.getElementById('auth-screen').classList.add('hidden');
+    document.getElementById('app-screen').classList.remove('hidden');
     document.getElementById('user-display').innerText = user;
-    showSection('chat'); // Domyślnie otwórz czat
 }
 
-function showSection(sectionName) {
-    const chat = document.getElementById('chat-section');
-    const settings = document.getElementById('settings-section');
-
-    if (sectionName === 'chat') {
-        chat.classList.remove('hidden');
-        settings.classList.add('hidden');
-    } else {
-        chat.classList.add('hidden');
-        settings.classList.remove('hidden');
-    }
+function toggleSettings() {
+    document.getElementById('settings-dropdown').classList.toggle('hidden');
 }
 
 function sendMessage() {
     const input = document.getElementById('msg-input');
-    const box = document.getElementById('messages');
     if (input.value.trim() !== "") {
-        const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        box.innerHTML += `<div style="margin-bottom:8px"><strong>Ty</strong> <small>${time}</small><br>${input.value}</div>`;
+        appendMessage("Ty", input.value, null);
         input.value = "";
-        document.getElementById('messages-container').scrollTop = box.scrollHeight;
     }
 }
 
-function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+function sendImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            appendMessage("Ty", null, e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
-function logout() {
-    location.reload();
+function appendMessage(user, text, imgSrc) {
+    const box = document.getElementById('messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message';
+    let content = `<strong>${user}</strong><br>`;
+    if (text) content += text;
+    if (imgSrc) content += `<img src="${imgSrc}" class="chat-img">`;
+    msgDiv.innerHTML = content;
+    box.appendChild(msgDiv);
+    document.getElementById('chat-container').scrollTop = box.scrollHeight;
 }
+
+function toggleDarkMode() { document.body.classList.toggle('dark-mode'); }
+function logout() { location.reload(); }
