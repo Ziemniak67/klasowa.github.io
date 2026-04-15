@@ -3,59 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eko-Portal Klasowy</title>
+    <title>Czat Klasowy</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Logowanie/Rejestracja -->
-        <div id="auth-box" class="card">
+    <!-- EKRAN LOGOWANIA -->
+    <div id="auth-screen" class="flex-center">
+        <div class="auth-card">
             <div class="logo">🌿</div>
-            <h2 id="title">Witaj w klasie!</h2>
-            <div class="input-group">
-                <input type="text" id="username" placeholder="Twoje imię/login">
-                <input type="password" id="password" placeholder="Hasło">
-            </div>
-            <button onclick="handleAuth()" id="main-btn" class="btn-primary">Zaloguj się</button>
-            <p onclick="toggleMode()" id="toggle-text">Nowy tutaj? Załóż konto</p>
-        </div>
-
-        <!-- Panel po zalogowaniu -->
-        <div id="welcome-msg" class="card hidden">
-            <header>
-                <h2>Witaj, <span id="user-display"></span>! 🌿</h2>
-                <nav>
-                    <button onclick="showSection('chat')" class="nav-btn">Czat</button>
-                    <button onclick="showSection('settings')" class="nav-btn">Ustawienia</button>
-                </nav>
-            </header>
-
-            <!-- Sekcja CZAT -->
-            <div id="chat-section" class="content-section">
-                <div id="messages-container">
-                    <div id="messages"></div>
-                </div>
-                <div class="chat-input-area">
-                    <input type="text" id="msg-input" placeholder="Napisz coś do klasy...">
-                    <button onclick="sendMessage()" class="btn-send">➤</button>
-                </div>
-            </div>
-
-            <!-- Sekcja USTAWIENIA -->
-            <div id="settings-section" class="content-section hidden">
-                <h3>Opcje konta</h3>
-                <div class="setting-item">
-                    <span>Tryb nocny</span>
-                    <button onclick="toggleDarkMode()" class="btn-small">Przełącz</button>
-                </div>
-                <div class="setting-item">
-                    <input type="password" id="new-pass" placeholder="Nowe hasło">
-                    <button onclick="changePassword()" class="btn-small">Zmień</button>
-                </div>
-                <button onclick="logout()" class="btn-danger">Wyloguj</button>
-            </div>
+            <h2>Witaj w klasie</h2>
+            <input type="text" id="username" placeholder="Login">
+            <input type="password" id="password" placeholder="Hasło">
+            <button onclick="handleAuth()" id="main-btn">Zaloguj się</button>
+            <p onclick="toggleMode()" id="toggle-text">Nie masz konta? Zarejestruj się</p>
         </div>
     </div>
+
+    <!-- EKRAN CZATU (CAŁY EKRAN) -->
+    <div id="app-screen" class="hidden">
+        <header class="app-header">
+            <div class="user-info">Czat Klasowy: <strong><span id="user-display"></span></strong></div>
+            <div class="settings-menu">
+                <button class="icon-btn" onclick="toggleSettings()">⚙️</button>
+                <div id="settings-dropdown" class="hidden">
+                    <button onclick="toggleDarkMode()">Tryb Ciemny</button>
+                    <button onclick="logout()" class="logout-btn">Wyloguj</button>
+                </div>
+            </div>
+        </header>
+
+        <main id="chat-container">
+            <div id="messages"></div>
+        </main>
+
+        <footer class="chat-footer">
+            <label class="file-label">
+                📷
+                <input type="file" id="image-input" accept="image/*" onchange="sendImage(this)">
+            </label>
+            <input type="text" id="msg-input" placeholder="Napisz wiadomość...">
+            <button onclick="sendMessage()" class="btn-send">Wyślij</button>
+        </footer>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
