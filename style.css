@@ -1,7 +1,12 @@
-body { font-family: Arial, sans-serif; display: flex; justify-center: center; align-items: center; height: 100vh; background: #f0f2f5; margin: 0; }
-.container { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 300px; }
-input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
-button:hover { background: #0056b3; }
+:root { --bg: #f0f2f5; --card: white; --text: #333; }
+.dark-mode { --bg: #1a1a1a; --card: #2d2d2d; --text: #eee; }
+
+body { background: var(--bg); color: var(--text); font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; transition: 0.3s; }
+.container { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; text-align: center; }
+input { width: 90%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; background: inherit; color: inherit; }
+button { width: 100%; padding: 10px; margin: 5px 0; border: none; border-radius: 6px; background: #007bff; color: white; cursor: pointer; }
+.btn-red { background: #dc3545; }
 .hidden { display: none; }
-#toggle-text { font-size: 12px; color: blue; cursor: pointer; margin-top: 10px; }
+.section { margin-top: 20px; border-top: 1px solid #555; padding-top: 10px; }
+#messages { height: 150px; overflow-y: auto; border: 1px solid #555; margin-bottom: 10px; padding: 5px; text-align: left; font-size: 14px; }
+#toggle-text { font-size: 12px; color: #007bff; cursor: pointer; }
