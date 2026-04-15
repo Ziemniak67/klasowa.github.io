@@ -8,39 +8,38 @@
 </head>
 <body>
 
-    <!-- LOGOWANIE -->
+    <!-- EKRAN LOGOWANIA -->
     <div id="auth-screen" class="auth-wrapper">
         <div class="auth-card">
-            <h2>Witaj w klasie 🌿</h2>
-            <input type="text" id="username" placeholder="Twój Login" style="width:90%; padding:10px; margin:5px; border-radius:10px; border:1px solid #ddd;">
-            <input type="password" id="password" placeholder="Hasło" style="width:90%; padding:10px; margin:5px; border-radius:10px; border:1px solid #ddd;">
-            <button onclick="handleAuth()" style="width:96%; padding:12px; margin-top:10px; border-radius:10px; border:none; background:#2d6a4f; color:white; cursor:pointer;">Zaloguj / Zarejestruj</button>
+            <h2 id="auth-title">Witaj w klasie 🌿</h2>
+            <input type="text" id="username" placeholder="Twój Login">
+            <input type="password" id="password" placeholder="Hasło">
+            <button onclick="handleAuth()" id="auth-btn">Zaloguj się</button>
+            <p id="toggle-text" onclick="toggleMode()">Nie masz konta? Załóż konto</p>
         </div>
     </div>
 
-    <!-- EKRAN GŁÓWNY (FULLSCREEN) -->
+    <!-- EKRAN CZATU (FULLSCREEN) -->
     <div id="app-screen" class="hidden">
         <header class="app-header">
-            <span>Czat Klasowy</span>
+            <span>Czat Klasowy: <b id="user-display"></b></span>
             <div class="settings-container">
                 <button class="gear-btn" onclick="toggleSettings()">⚙️</button>
                 <div id="settings-menu" class="hidden">
-                    <button onclick="toggleDarkMode()" style="width:100%; padding:8px; margin-bottom:5px;">Tryb Ciemny</button>
-                    <button onclick="location.reload()" style="width:100%; padding:8px; background:#ff4d4d; color:white; border:none; border-radius:5px;">Wyloguj</button>
+                    <button onclick="toggleDarkMode()">Tryb Ciemny</button>
+                    <button onclick="location.reload()" class="logout-btn">Wyloguj</button>
                 </div>
             </div>
         </header>
 
-        <div id="chat-main">
-            <!-- Wiadomości -->
-        </div>
+        <main id="chat-main"></main>
 
         <footer class="chat-footer">
-            <label style="cursor:pointer; font-size:20px;">
+            <label class="attach-btn">
                 📎 <input type="file" id="img-input" hidden accept="image/*" onchange="sendFile(this)">
             </label>
             <input type="text" id="msg-input" placeholder="Napisz coś...">
-            <button onclick="sendMsg()" style="padding:10px 20px; border-radius:20px; border:none; background:#2d6a4f; color:white;">Wyślij</button>
+            <button onclick="sendMsg()" class="send-btn">Wyślij</button>
         </footer>
     </div>
 
