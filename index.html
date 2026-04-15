@@ -7,42 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- EKRAN LOGOWANIA -->
-    <div id="auth-screen" class="flex-center">
+
+    <!-- LOGOWANIE -->
+    <div id="auth-screen" class="auth-wrapper">
         <div class="auth-card">
-            <div class="logo">🌿</div>
-            <h2>Witaj w klasie</h2>
-            <input type="text" id="username" placeholder="Login">
-            <input type="password" id="password" placeholder="Hasło">
-            <button onclick="handleAuth()" id="main-btn">Zaloguj się</button>
-            <p onclick="toggleMode()" id="toggle-text">Nie masz konta? Zarejestruj się</p>
+            <h2>Witaj w klasie 🌿</h2>
+            <input type="text" id="username" placeholder="Twój Login" style="width:90%; padding:10px; margin:5px; border-radius:10px; border:1px solid #ddd;">
+            <input type="password" id="password" placeholder="Hasło" style="width:90%; padding:10px; margin:5px; border-radius:10px; border:1px solid #ddd;">
+            <button onclick="handleAuth()" style="width:96%; padding:12px; margin-top:10px; border-radius:10px; border:none; background:#2d6a4f; color:white; cursor:pointer;">Zaloguj / Zarejestruj</button>
         </div>
     </div>
 
-    <!-- EKRAN CZATU (CAŁY EKRAN) -->
+    <!-- EKRAN GŁÓWNY (FULLSCREEN) -->
     <div id="app-screen" class="hidden">
         <header class="app-header">
-            <div class="user-info">Czat Klasowy: <strong><span id="user-display"></span></strong></div>
-            <div class="settings-menu">
-                <button class="icon-btn" onclick="toggleSettings()">⚙️</button>
-                <div id="settings-dropdown" class="hidden">
-                    <button onclick="toggleDarkMode()">Tryb Ciemny</button>
-                    <button onclick="logout()" class="logout-btn">Wyloguj</button>
+            <span>Czat Klasowy</span>
+            <div class="settings-container">
+                <button class="gear-btn" onclick="toggleSettings()">⚙️</button>
+                <div id="settings-menu" class="hidden">
+                    <button onclick="toggleDarkMode()" style="width:100%; padding:8px; margin-bottom:5px;">Tryb Ciemny</button>
+                    <button onclick="location.reload()" style="width:100%; padding:8px; background:#ff4d4d; color:white; border:none; border-radius:5px;">Wyloguj</button>
                 </div>
             </div>
         </header>
 
-        <main id="chat-container">
-            <div id="messages"></div>
-        </main>
+        <div id="chat-main">
+            <!-- Wiadomości -->
+        </div>
 
         <footer class="chat-footer">
-            <label class="file-label">
-                📷
-                <input type="file" id="image-input" accept="image/*" onchange="sendImage(this)">
+            <label style="cursor:pointer; font-size:20px;">
+                📎 <input type="file" id="img-input" hidden accept="image/*" onchange="sendFile(this)">
             </label>
-            <input type="text" id="msg-input" placeholder="Napisz wiadomość...">
-            <button onclick="sendMessage()" class="btn-send">Wyślij</button>
+            <input type="text" id="msg-input" placeholder="Napisz coś...">
+            <button onclick="sendMsg()" style="padding:10px 20px; border-radius:20px; border:none; background:#2d6a4f; color:white;">Wyślij</button>
         </footer>
     </div>
 
