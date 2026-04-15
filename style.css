@@ -1,31 +1,45 @@
-:root { --bg: #f8f9fa; --text: #1a1a1a; --primary: #2d6a4f; --card: #ffffff; }
-body.dark-mode { --bg: #121212; --text: #f0f0f0; --card: #1e1e1e; }
+:root { --bg: #ffffff; --side: #f8f9fa; --text: #1a1a1a; --primary: #2d6a4f; --msg-own: #dcf8c6; }
+body.dark-mode { --bg: #121212; --side: #1e1e1e; --text: #f0f0f0; --primary: #52b788; --msg-own: #056162; }
 
-body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Segoe UI', sans-serif; overflow: hidden; background: var(--bg); color: var(--text); }
 .hidden { display: none !important; }
 
-/* LOGOWANIE */
-.auth-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; background: #e9ecef; }
-.auth-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 300px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-.auth-card input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
-.auth-card button { width: 98%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
-#toggle-text { font-size: 13px; color: #007bff; cursor: pointer; margin-top: 15px; }
+/* Logowanie */
+.auth-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; background: #eee; }
+.auth-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 280px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); color: #333; }
+.auth-card input { width: 90%; padding: 10px; margin: 5px; border-radius: 8px; border: 1px solid #ddd; }
+.auth-card button { width: 98%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; }
 
-/* CZAT FULLSCREEN */
-#app-screen { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
-.app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: var(--card); border-bottom: 1px solid #ddd; }
-.gear-btn { font-size: 24px; cursor: pointer; background: none; border: none; color: var(--text); }
+/* Układ główny */
+#app-screen { display: flex; height: 100vh; width: 100vw; }
 
-#settings-menu { position: absolute; right: 20px; top: 60px; background: var(--card); border: 1px solid #ddd; border-radius: 10px; width: 150px; z-index: 100; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-#settings-menu button { width: 100%; padding: 8px; margin: 5px 0; cursor: pointer; border-radius: 5px; border: 1px solid #ddd; background: var(--bg); color: var(--text); }
-.logout-btn { background: #ff4d4d !important; color: white !important; border: none !important; }
+/* Menu boczne */
+#side-menu { width: 250px; background: var(--side); border-right: 1px solid #ddd; display: flex; flex-direction: column; }
+.profile-section { padding: 20px; text-align: center; border-bottom: 1px solid #ddd; }
+.avatar-label img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; cursor: pointer; border: 3px solid var(--primary); }
+.user-meta { margin-top: 10px; font-weight: bold; }
+#admin-tag { background: gold; color: black; font-size: 10px; padding: 2px 6px; border-radius: 4px; }
 
+.pv-list { flex: 1; padding: 10px; }
+.nav-title { font-size: 12px; color: gray; text-transform: uppercase; margin-bottom: 10px; }
+.pv-item { padding: 10px; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+.pv-item:hover { background: rgba(0,0,0,0.05); }
+
+/* Obszar wiadomości */
+#chat-area { flex: 1; display: flex; flex-direction: column; }
+.chat-header { padding: 10px 20px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; }
 #chat-main { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
-.chat-footer { display: flex; align-items: center; padding: 15px; background: var(--card); border-top: 1px solid #ddd; gap: 10px; }
-.chat-footer input { flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ddd; background: var(--bg); color: var(--text); }
-.send-btn { padding: 10px 20px; border-radius: 20px; border: none; background: var(--primary); color: white; cursor: pointer; }
+.chat-footer { padding: 15px; border-top: 1px solid #ddd; display: flex; align-items: center; gap: 10px; }
+.chat-footer input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid #ddd; background: var(--side); color: var(--text); }
 
-/* WIADOMOŚCI */
-.msg { padding: 10px 15px; border-radius: 18px; max-width: 70%; background: #e9ecef; color: #1a1a1a; align-self: flex-start; word-wrap: break-word; }
-.msg.own { align-self: flex-end; background: var(--primary); color: white; }
-.chat-img { max-width: 100%; border-radius: 10px; margin-top: 5px; }
+/* Wiadomości */
+.msg { padding: 8px 15px; border-radius: 15px; max-width: 70%; background: #e9ecef; align-self: flex-start; color: #000; }
+.msg.own { align-self: flex-end; background: var(--msg-own); }
+.dark-mode .msg:not(.own) { background: #333; color: #fff; }
+
+/* Responsywność na telefony */
+@media (max-width: 700px) {
+    #side-menu { width: 80px; }
+    .nav-title, .user-meta, .pv-item { font-size: 0; }
+    .pv-item::first-letter { font-size: 20px; }
+}
