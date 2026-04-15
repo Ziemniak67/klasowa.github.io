@@ -8,17 +8,40 @@
 </head>
 <body>
     <div class="container">
+        <!-- Ekran Logowania -->
         <div id="auth-box">
             <h2 id="title">Logowanie</h2>
-            <input type="text" id="username" placeholder="Login / Imię">
+            <input type="text" id="username" placeholder="Login">
             <input type="password" id="password" placeholder="Hasło">
             <button onclick="handleAuth()" id="main-btn">Zaloguj</button>
             <p onclick="toggleMode()" id="toggle-text">Nie masz konta? Zarejestruj się</p>
         </div>
+
+        <!-- Ekran Główny -->
         <div id="welcome-msg" class="hidden">
             <h1>Cześć, <span id="user-display"></span>! 👋</h1>
-            <p>Witamy w systemie naszej klasy.</p>
-            <button onclick="logout()">Wyloguj</button>
+            
+            <div class="menu">
+                <button onclick="showSection('chat')">Czat</button>
+                <button onclick="showSection('settings')">Ustawienia</button>
+                <button onclick="logout()" class="btn-red">Wyloguj</button>
+            </div>
+
+            <div id="chat-section" class="section">
+                <h3>Czat klasowy</h3>
+                <div id="messages"></div>
+                <input type="text" id="msg-input" placeholder="Napisz wiadomość...">
+                <button onclick="sendMessage()">Wyślij</button>
+            </div>
+
+            <div id="settings-section" class="section hidden">
+                <h3>Ustawienia</h3>
+                <button onclick="toggleDarkMode()">Przełącz Tryb Ciemny</button>
+                <hr>
+                <input type="password" id="new-pass" placeholder="Nowe hasło">
+                <button onclick="changePassword()">Zmień hasło</button>
+                <p>2FA: <button onclick="alert('Kod 2FA wysłany na Twój (symulowany) email!')">Aktywuj 2FA</button></p>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
