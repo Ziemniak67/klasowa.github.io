@@ -1,39 +1,31 @@
-:root { --bg: #ffffff; --text: #1a1a1a; --primary: #2d6a4f; --gray: #f0f2f5; }
-body.dark-mode { --bg: #121212; --text: #f0f0f0; --gray: #2d2d2d; }
+:root { --bg: #f8f9fa; --text: #1a1a1a; --primary: #2d6a4f; --card: #ffffff; }
+body.dark-mode { --bg: #121212; --text: #f0f0f0; --card: #1e1e1e; }
 
-body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+body, html { margin: 0; padding: 0; height: 100vh; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
 .hidden { display: none !important; }
 
-/* LOGOWANIE - NA ŚRODKU */
-.auth-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; background: var(--gray); }
-.auth-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+/* LOGOWANIE */
+.auth-wrapper { display: flex; justify-content: center; align-items: center; height: 100vh; background: #e9ecef; }
+.auth-card { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 300px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+.auth-card input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #ddd; }
+.auth-card button { width: 98%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+#toggle-text { font-size: 13px; color: #007bff; cursor: pointer; margin-top: 15px; }
 
-/* CZAT - CAŁY EKRAN */
-#app-screen { display: flex; flex-direction: column; height: 100vh; width: 100vw; background: var(--bg); }
+/* CZAT FULLSCREEN */
+#app-screen { display: flex; flex-direction: column; height: 100vh; width: 100vw; }
+.app-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: var(--card); border-bottom: 1px solid #ddd; }
+.gear-btn { font-size: 24px; cursor: pointer; background: none; border: none; color: var(--text); }
 
-.app-header { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 10px 20px; background: var(--bg); border-bottom: 1px solid #ddd;
-}
+#settings-menu { position: absolute; right: 20px; top: 60px; background: var(--card); border: 1px solid #ddd; border-radius: 10px; width: 150px; z-index: 100; padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+#settings-menu button { width: 100%; padding: 8px; margin: 5px 0; cursor: pointer; border-radius: 5px; border: 1px solid #ddd; background: var(--bg); color: var(--text); }
+.logout-btn { background: #ff4d4d !important; color: white !important; border: none !important; }
 
-.settings-container { position: relative; }
-.gear-btn { font-size: 24px; cursor: pointer; background: none; border: none; }
+#chat-main { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
+.chat-footer { display: flex; align-items: center; padding: 15px; background: var(--card); border-top: 1px solid #ddd; gap: 10px; }
+.chat-footer input { flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ddd; background: var(--bg); color: var(--text); }
+.send-btn { padding: 10px 20px; border-radius: 20px; border: none; background: var(--primary); color: white; cursor: pointer; }
 
-#settings-menu { 
-    position: absolute; right: 0; top: 40px; background: var(--bg); 
-    border: 1px solid #ddd; border-radius: 10px; width: 160px; z-index: 10; padding: 10px;
-}
-
-#chat-main { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
-
-.chat-footer { 
-    display: flex; align-items: center; padding: 15px 20px; 
-    background: var(--bg); border-top: 1px solid #ddd; gap: 10px;
-}
-
-.chat-footer input { flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ddd; background: var(--gray); color: var(--text); }
-
-/* STYL WIADOMOŚCI */
-.msg { padding: 10px 15px; border-radius: 18px; max-width: 70%; background: var(--gray); align-self: flex-start; }
+/* WIADOMOŚCI */
+.msg { padding: 10px 15px; border-radius: 18px; max-width: 70%; background: #e9ecef; color: #1a1a1a; align-self: flex-start; word-wrap: break-word; }
 .msg.own { align-self: flex-end; background: var(--primary); color: white; }
 .chat-img { max-width: 100%; border-radius: 10px; margin-top: 5px; }
