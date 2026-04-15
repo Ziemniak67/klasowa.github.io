@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Klasowy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="auth-box">
+            <h2 id="title">Logowanie</h2>
+            <input type="text" id="username" placeholder="Login / Imię">
+            <input type="password" id="password" placeholder="Hasło">
+            <button onclick="handleAuth()" id="main-btn">Zaloguj</button>
+            <p onclick="toggleMode()" id="toggle-text">Nie masz konta? Zarejestruj się</p>
+        </div>
+        <div id="welcome-msg" class="hidden">
+            <h1>Cześć, <span id="user-display"></span>! 👋</h1>
+            <p>Witamy w systemie naszej klasy.</p>
+            <button onclick="logout()">Wyloguj</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
