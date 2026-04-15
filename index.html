@@ -3,44 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Klasowy</title>
+    <title>Eko-Portal Klasowy</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Ekran Logowania -->
-        <div id="auth-box">
-            <h2 id="title">Logowanie</h2>
-            <input type="text" id="username" placeholder="Login">
-            <input type="password" id="password" placeholder="Hasło">
-            <button onclick="handleAuth()" id="main-btn">Zaloguj</button>
-            <p onclick="toggleMode()" id="toggle-text">Nie masz konta? Zarejestruj się</p>
+    <div class="app-container">
+        <!-- Logowanie/Rejestracja -->
+        <div id="auth-box" class="card">
+            <div class="logo">🌿</div>
+            <h2 id="title">Witaj w klasie!</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Twoje imię/login">
+                <input type="password" id="password" placeholder="Hasło">
+            </div>
+            <button onclick="handleAuth()" id="main-btn" class="btn-primary">Zaloguj się</button>
+            <p onclick="toggleMode()" id="toggle-text">Nowy tutaj? Załóż konto</p>
         </div>
 
-        <!-- Ekran Główny -->
-        <div id="welcome-msg" class="hidden">
-            <h1>Cześć, <span id="user-display"></span>! 👋</h1>
-            
-            <div class="menu">
-                <button onclick="showSection('chat')">Czat</button>
-                <button onclick="showSection('settings')">Ustawienia</button>
-                <button onclick="logout()" class="btn-red">Wyloguj</button>
+        <!-- Panel po zalogowaniu -->
+        <div id="welcome-msg" class="card hidden">
+            <header>
+                <h2>Witaj, <span id="user-display"></span>! 🌿</h2>
+                <nav>
+                    <button onclick="showSection('chat')" class="nav-btn">Czat</button>
+                    <button onclick="showSection('settings')" class="nav-btn">Ustawienia</button>
+                </nav>
+            </header>
+
+            <!-- Sekcja CZAT -->
+            <div id="chat-section" class="content-section">
+                <div id="messages-container">
+                    <div id="messages"></div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="msg-input" placeholder="Napisz coś do klasy...">
+                    <button onclick="sendMessage()" class="btn-send">➤</button>
+                </div>
             </div>
 
-            <div id="chat-section" class="section">
-                <h3>Czat klasowy</h3>
-                <div id="messages"></div>
-                <input type="text" id="msg-input" placeholder="Napisz wiadomość...">
-                <button onclick="sendMessage()">Wyślij</button>
-            </div>
-
-            <div id="settings-section" class="section hidden">
-                <h3>Ustawienia</h3>
-                <button onclick="toggleDarkMode()">Przełącz Tryb Ciemny</button>
-                <hr>
-                <input type="password" id="new-pass" placeholder="Nowe hasło">
-                <button onclick="changePassword()">Zmień hasło</button>
-                <p>2FA: <button onclick="alert('Kod 2FA wysłany na Twój (symulowany) email!')">Aktywuj 2FA</button></p>
+            <!-- Sekcja USTAWIENIA -->
+            <div id="settings-section" class="content-section hidden">
+                <h3>Opcje konta</h3>
+                <div class="setting-item">
+                    <span>Tryb nocny</span>
+                    <button onclick="toggleDarkMode()" class="btn-small">Przełącz</button>
+                </div>
+                <div class="setting-item">
+                    <input type="password" id="new-pass" placeholder="Nowe hasło">
+                    <button onclick="changePassword()" class="btn-small">Zmień</button>
+                </div>
+                <button onclick="logout()" class="btn-danger">Wyloguj</button>
             </div>
         </div>
     </div>
